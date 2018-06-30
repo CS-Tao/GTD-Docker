@@ -1,0 +1,64 @@
+version: '3'
+services:
+    nginx:
+        image: "${ENV_DOCKER_USER}/gtd-nginx:1.14.0-perl"
+        build:
+            context: nginx/
+            dockerfile: Dockerfile
+        restart: always
+        volumes:
+            - uwsgi-sock:/var/gtd/django-sock
+            - static-files:/usr/share/nginx/html/static
+            - logs:/var/gtd/logs
+        ports:
+            - "${ENV_NGINX_PORT}:8070"
+        networks:
+            - network
+        depends_on:
+            - django
+    django:
+        image: "${ENV_DOCKER_USER}/gtd-django:2.0.4"
+        build:
+            context: django/
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            POSTGRES_HOST: "postgis"
+            POSTGRES_PORT: "5432"
+            POSTGRES_DATABASE: "${ENV_POSTGRES_DB}"
+            POSTGRES_USER: "${ENV_POSTGRES_USER}"
+            POSTGRES_PASSWD: "${ENV_POSTGRES_PASSWD}"
+        volumes:
+            - uwsgi-sock:/var/gtd/uwsgi-sock
+            - static-files:/opt/gtddjango/static
+            - logs:/var/gtd/logs
+        networks:
+            - network
+        depends_on:
+            - postgis
+    postgis:
+        image: "${ENV_DOCKER_USER}/gtd-postgis:9.6"
+        build:
+            context: postgis/
+            dockerfile: Dockerfile
+        environment:
+            POSTGRES_USER: ${ENV_POSTGRES_USER}
+            POSTGRES_PASSWD: ${ENV_POSTGRES_PASSWD}
+            POSTGRES_PASSWORD: ${ENV_POSTGRES_PASSWD_ADMIN}
+            POSTGRES_DATABASE: ${ENV_POSTGRES_DB}
+            PGDATA: /var/lib/postgresql/data/pgdata
+            POSTGRES_INITDB_XLOGDIR: /var/gtd/logs/postgresql
+        volumes:
+            - postgresql-data:/var/lib/postgresql/data
+            - logs:/var/gtd/logs
+        ports:
+            - "${ENV_POSTGIS_PORT}:5432"
+        networks:
+            - network
+volumes:
+    postgresql-data:
+    uwsgi-sock:
+    static-files:
+    logs:
+networks:
+    network:
