@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+psql -tc "SELECT * FROM pg_roles WHERE rolname='${POSTGRES_USER}'" | grep -q 1 || psql -tc "CREATE USER ${POSTGRES_USER} WITH PASSWORD '${POSTGRES_PASSWD}'";
+
+psql <<- EOSQL
+
+    ALTER USER ${POSTGRES_USER} WITH PASSWORD '${POSTGRES_PASSWD}';
+    ALTER USER postgres WITH PASSWORD '${POSTGRES_PASSWORD}';
+    ALTER USER ${POSTGRES_USER} WITH VALID UNTIL 'infinity';
+
+EOSQL
