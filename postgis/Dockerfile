@@ -1,6 +1,8 @@
 FROM postgres:9.6
 LABEL maintainer="CS-Tao <whucstao@qq.com>" version="1.0.0"
 
+ENV PG_DUMPED_DATA_URL https://gogs.cs-tao.cc/CS-Tao/GTD-Docker/src/ca3c9f718ed8a2337874f17b7939a59b84071654/postgis/gtdb.sql
+
 ENV POSRGRESQL_MAJOR 9.6
 
 ENV POSTGIS_MAJOR 2.4
@@ -40,14 +42,17 @@ ENV POSTGIS_MAJOR 2.4
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
+            ca-certificates \
+            wget \
             postgis \
             postgresql-${POSRGRESQL_MAJOR}-postgis-${POSTGIS_MAJOR} \
             postgresql-${POSRGRESQL_MAJOR}-postgis-scripts \
+      && wget -P /usr/local/bin ${PG_DUMPED_DATA_URL} \
+      && apt-get purge -y --auto-remove ca-certificates wget \
       && rm -rf /var/lib/apt/lists/*
 
 COPY create_role.sh /docker-entrypoint-initdb.d/10-create_role.sh
 COPY init_db.sh /docker-entrypoint-initdb.d/20-init_db.sh
-COPY gtdb.sql /usr/local/bin/gtdb.sql
 
 RUN   chmod 755 /docker-entrypoint-initdb.d/10-create_role.sh \
       && chmod 755 /docker-entrypoint-initdb.d/20-init_db.sh \
