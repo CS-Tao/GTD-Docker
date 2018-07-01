@@ -7,4 +7,5 @@ else
     sed -i "1s/^/\\\connect ${POSTGRES_DATABASE}\n/" /usr/local/bin/gtdb.sql
     psql -tc "CREATE DATABASE ${POSTGRES_DATABASE} WITH OWNER = ${POSTGRES_USER}"
     psql -v gtdb_user=${POSTGRES_USER} -f /usr/local/bin/gtdb.sql
+    echo "Data imported to ${POSTGRES_DATABASE}"
 fi

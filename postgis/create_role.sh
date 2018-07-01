@@ -10,3 +10,5 @@ psql <<- EOSQL
     ALTER USER ${POSTGRES_USER} WITH VALID UNTIL 'infinity';
 
 EOSQL
+
+echo "Created user ${POSTGRES_USER}"
