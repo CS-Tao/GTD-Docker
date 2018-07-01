@@ -11,14 +11,14 @@ RUN echo "Installing packages ..." \
       # && sed -i 's|security.debian.org|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list \
       && apt-get update \
       && apt-get install -y --no-install-recommends libgdal-dev git \
-      && rm -rf /var/lib/apt/lists/*
-
-RUN cd /opt \
+      && cd /opt \
       && git clone ${DJANGO_REPO_URL} -b ${DJANGO_REPO_BRANCH} GTD-Background \
       && cd GTD-Background \
       && ls -a -l \
       && pip install -r requirements.txt \
-      && pip3 install https://github.com/darklow/django-suit/tarball/v2
+      && pip3 install https://github.com/darklow/django-suit/tarball/v2 \
+      && apt-get purge -y --auto-remove git \
+      && rm -rf /var/lib/apt/lists/*
 
 COPY docker-uwsgi-entrypoint.sh /docker-uwsgi-entrypoint.sh
 COPY settings.py /opt/settings.py
