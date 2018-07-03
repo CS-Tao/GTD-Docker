@@ -21,4 +21,3 @@ test: off
 branches:
   only:
     - master
-    - add-ci

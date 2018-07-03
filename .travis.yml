@@ -27,9 +27,7 @@ deploy:
   on:
     branch:
       - master
-      - add-ci
 
 branches:
   only:
   - master
-  - add-ci
