@@ -1,0 +1,23 @@
+
+
+image: ubuntu
+
+services:
+  - docker
+
+init:
+  - curl -L https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - docker-compose build
+
+build_script:
+  - docker-compose up -d
+
+test: off
+
+branches:
+  only:
+    - master
