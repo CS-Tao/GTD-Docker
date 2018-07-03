@@ -5,17 +5,9 @@ ENV TZ UTC
 ENV LANG C.UTF-8
 ENV WEB_REPO_URL https://github.com/CS-Tao/GTD-Visualization.git
 ENV WEB_REPO_BRANCH gh-pages
-
-RUN echo "Installing packages ..." \
-      # && echo 'deb http://mirrors.ustc.edu.cn/debian jessie main contrib non-free' > /etc/apt/sources.list \
-      # && echo 'deb-src http://mirrors.ustc.edu.cn/debian jessie main contrib non-free' >> /etc/apt/sources.list \
-      # && echo 'deb http://mirrors.ustc.edu.cn/debian jessie-proposed-updates main contrib non-free' >> /etc/apt/sources.list \
-      # && echo 'deb-src http://mirrors.ustc.edu.cn/debian jessie-proposed-updates main contrib non-free' >> /etc/apt/sources.list \
-      # && echo 'deb http://mirrors.ustc.edu.cn/debian jessie-updates main contrib non-free' >> /etc/apt/sources.list \
-      # && echo 'deb-src http://mirrors.ustc.edu.cn/debian jessie-updates main contrib non-free' >> /etc/apt/sources.list \
-      && apt-get update \
-      && apt-get install -y --no-install-recommends ca-certificates git \
-      && rm -rf /var/lib/apt/lists/*
+ENV WEB_FOLDER web
+ENV WEB_OLD_SRC_URL http://47.94.208.122:9000
+ENV WEB_NEW_SRC_URL ../../
 
 RUN echo "Installing packages ..." \
       # && echo 'deb http://mirrors.ustc.edu.cn/debian jessie main contrib non-free' > /etc/apt/sources.list \
@@ -29,7 +21,8 @@ RUN echo "Installing packages ..." \
       && mkdir -p /usr/share/nginx/html/ \
       && cd /usr/share/nginx/html/ \
       && git clone ${WEB_REPO_URL} -b ${WEB_REPO_BRANCH} gtd-visualization \
-      && cd gtd-visualization \
+      && cd gtd-visualization/${WEB_FOLDER} \
+      && sed -i "s?baseURL:\"${WEB_OLD_SRC_URL}\"?baseURL:\"${WEB_NEW_SRC_URL}\"?" web.js \
       && ls -a -l \
       && apt-get purge -y --auto-remove ca-certificates git \
       && rm -rf /var/lib/apt/lists/*
