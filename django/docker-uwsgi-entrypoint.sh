@@ -23,7 +23,7 @@ cat >> /opt/GTD-Background/terrorism_rear_end/settings.py << EOF
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': '$POSTGRES_DATABASE',
+        'NAME': '$POSTGRES_DB',
         'USER': '$POSTGRES_USER',
         'HOST': '$POSTGRES_HOST',
         'PORT': '$POSTGRES_PORT',

@@ -25,7 +25,7 @@ services:
         environment:
             POSTGRES_HOST: "postgis"
             POSTGRES_PORT: "5432"
-            POSTGRES_DATABASE: "${ENV_POSTGRES_DB}"
+            POSTGRES_DB: "${ENV_POSTGRES_DB}"
             POSTGRES_USER: "${ENV_POSTGRES_USER}"
             POSTGRES_PASSWD: "${ENV_POSTGRES_PASSWD}"
         volumes:
@@ -46,7 +46,7 @@ services:
             POSTGRES_USER: ${ENV_POSTGRES_USER}
             POSTGRES_PASSWD: ${ENV_POSTGRES_PASSWD}
             POSTGRES_PASSWORD: ${ENV_POSTGRES_PASSWD_ADMIN}
-            POSTGRES_DATABASE: ${ENV_POSTGRES_DB}
+            POSTGRES_DB: ${ENV_POSTGRES_DB}
             PGDATA: /var/lib/postgresql/data/pgdata
             POSTGRES_INITDB_XLOGDIR: /var/gtd/logs/postgresql
         volumes:
