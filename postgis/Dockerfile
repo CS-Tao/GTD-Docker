@@ -18,11 +18,13 @@ RUN apt-get update \
 
 COPY create_role.sh /docker-entrypoint-initdb.d/10-create_role.sh
 COPY init_db.sh /docker-entrypoint-initdb.d/20-init_db.sh
-COPY import_data.sh /usr/local/bin/import_data.sh
+COPY import_data /usr/local/bin/import_data
+COPY _import_data /usr/local/bin/_import_data
 
 RUN   chmod 755 /docker-entrypoint-initdb.d/10-create_role.sh \
       && chmod 755 /docker-entrypoint-initdb.d/20-init_db.sh \
-      && chmod +x /usr/local/bin/import_data.sh \
+      && chmod +x /usr/local/bin/_import_data \
+      && chmod +x /usr/local/bin/import_data \
       && chown -R postgres:postgres /usr/local/bin
 
 VOLUME ["/var/lib/postgresql/data", "/var/gtd/logs"]

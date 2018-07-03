@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PG_DUMPED_DATA_URL = ${PG_DUMPED_DATA_DEFAULT_URL}
+PG_DUMPED_DATA_URL=${PG_DUMPED_DATA_DEFAULT_URL}
 
 if [ ! "$( psql -tAc "SELECT 1 FROM pg_database WHERE datname='${POSTGRES_DB}'" )" = '1' ]; then
     psql -tc "CREATE DATABASE ${POSTGRES_DB} WITH OWNER = ${POSTGRES_USER}"
@@ -8,6 +8,7 @@ fi
 
 if [ ! -d "/usr/local/bin" ];then
     mkdir /usr/local/bin
+fi
 
 if [ x"$1" = x ]; then
     echo "No data url specified, use default data url as below:"

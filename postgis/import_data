@@ -1,0 +1,2 @@
+#!/bin/bash
+su - postgres --preserve-environment -s /bin/bash _import_data
