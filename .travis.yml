@@ -20,9 +20,14 @@ install:
 
 script:
   - docker-compose up -d
-  - docker-compose push postgis
-  - docker-compose push django
-  - docker-compose push nginx
+
+deploy:
+  provider: script
+  script: bash .travis-ci/deploy
+  on:
+    branch:
+      - master
+      - add-ci
 
 branches:
   only:

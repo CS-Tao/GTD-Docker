@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+docker-compose push postgis
+docker-compose push django
+docker-compose push nginx
