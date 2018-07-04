@@ -7,14 +7,16 @@
 
 > Global Terrorist Attacks Visualization System - Deploy Solution by Docker-compose
 
+[![Overview](https://github.com/CS-Tao/github-content/raw/master/contents/github/GTD/1.webp)](https://projects.cs-tao.cc/gtd-visualization/)
+
 ## 项目结构
 
 - 项目地址：[https://github.com/CS-Tao/GTD-Docker](https://github.com/CS-Tao/GTD-Docker)
 
 - 镜像仓库:
-  - [cstao/gtd-postgis](https://cloud.docker.com/swarm/cstao/repository/docker/cstao/gtd-postgis/general)
-  - [cstao/gtd-django](https://cloud.docker.com/swarm/cstao/repository/docker/cstao/gtd-django/general)
-  - [cstao/gtd-nginx](https://cloud.docker.com/swarm/cstao/repository/docker/cstao/gtd-nginx/general)
+  - [cstao/gtd-postgis](https://store.docker.com/community/images/cstao/gtd-postgis)
+  - [cstao/gtd-django](https://store.docker.com/community/images/cstao/gtd-django)
+  - [cstao/gtd-nginx](https://store.docker.com/community/images/cstao/gtd-nginx)
 
 ### 服务堆栈
 
@@ -104,7 +106,7 @@
   ```bash
   docker-compose build
   ```
-  或者从 [cloud.docker.com](https://cloud.docker.com/swarm/cstao/repository/list) 拉取：
+  或者从 [store.docker.com](https://store.docker.com/profiles/cstao) 拉取：
   ```bash
   docker-compose pull
   ```
@@ -120,11 +122,11 @@
   docker-compose up -d
   ```
 
-- 导入数据
+- 导入数据到 postgresql 数据库
 
-  利用 `docker ps` 命令得到 `postgis` 容器的 `ID`，然后在 `postgis` 容器中执行导入数据的命令：
+  利用 `docker ps` 命令得到 `postgis` 容器的 `ID`，然后在 `postgis` 容器中执行导入数据的命令(`pg_dumped_data-url` 应该替换为自定义的 sql 数据的 URL，如果不指定该参数，则默认使用 `https://github.com/CS-Tao/GTD-Docker/releases/download/v1.0.0/gtdb.sql` 作为源数据)：
   ```bash
-  docker exec -i <postgis-container-id> import_data
+  docker exec -i <postgis-container-id> import_data [pg_dumped_data-url]
   ```
 
 - 启动/停止/重启服务
@@ -157,8 +159,9 @@
   
   - 添加 `--rmi type` 参数可以移除镜像，`tpye` 可以为 `all` 或 `local`，`all` 表示移除所有镜像，`local` 表示只移除没有定义标签的镜像
   - 添加 `-v` 或 `--volume` 参数可以移除所有在 `docker-compose.yml` 中定义的数据卷
+
   ```bash
-  docker-compose down
+  docker-compose down [--rmi <all>|<local>] [-v|--volume]
   ```
 
 ## Maintainer
