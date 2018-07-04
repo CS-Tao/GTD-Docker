@@ -97,12 +97,12 @@
   ```bash
   docker-compose build
   ```
-  或者从 [cloud.docker.com](https://cloud.docker.com/swarm/cstao/repository/list) 拉取
+  或者从 [cloud.docker.com](https://cloud.docker.com/swarm/cstao/repository/list) 拉取：
   ```bash
   docker-compose pull
   ```
 
-- 创建并启动服务 - 同步
+- 创建并启动服务
 
   同步：
   ```bash
@@ -115,7 +115,7 @@
 
 - 导入数据
 
-  利用 `docker ps` 命令得到 `postgis` 容器的 `ID`
+  利用 `docker ps` 命令得到 `postgis` 容器的 `ID`，然后在 `postgis` 容器中执行导入数据的命令：
   ```bash
   docker exec -i <postgis-container-id> import_data
   ```
@@ -147,12 +147,12 @@
   ```
 
 - 停止并移除由 `docker-compose.yml` 定义的服务容器和网络
-
+  
+  - 添加 `--rmi type` 参数可以移除镜像，`tpye` 可以为 `all` 或 `local`，`all` 表示移除所有镜像，`local` 表示只移除没有定义标签的镜像
+  - 添加 `-v` 或 `--volume` 参数可以移除所有在 `docker-compose.yml` 中定义的数据卷
   ```bash
   docker-compose down
   ```
-  - 添加 `--rmi type` 参数可以移除镜像，`tpye` 可以为 `all` 或 `local`，`all` 表示移除所有镜像，`local` 表示只移除没有定义标签的镜像
-  - 添加 `-v` 或 `--volume` 参数可以移除所有在 `docker-compose.yml` 中定义的数据卷
 
 ## Maintainer
 
