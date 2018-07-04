@@ -17,7 +17,3 @@ build_script:
   - docker-compose up -d
 
 test: off
-
-branches:
-  only:
-    - master
