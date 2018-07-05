@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 ENV WEB_REPO_URL https://github.com/CS-Tao/GTD-Visualization.git
 ENV WEB_REPO_BRANCH gh-pages
 ENV WEB_FOLDER web
-ENV WEB_OLD_SRC_URL http://47.94.208.122:9000
+ENV WEB_OLD_SRC_URL http://localhost:2001
 ENV WEB_NEW_SRC_URL ../../
 
 RUN echo "Installing packages ..." \
