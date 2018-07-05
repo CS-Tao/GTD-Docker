@@ -15,9 +15,11 @@ install:
 
 build_script:
   - docker-compose up -d
+  - sleep 10s
 
 before_test:
   - docker exec -i $(docker ps -a | grep django | cut -c1-12) python manage.py migrate
+  - sleep 3s
 
 test_script:
   - chmod +x .appveyor/test
