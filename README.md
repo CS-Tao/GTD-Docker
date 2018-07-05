@@ -7,7 +7,7 @@
 
 > Global Terrorist Attacks Visualization System - Deploy Solution by Docker-compose
 
-[![Overview](https://github.com/CS-Tao/github-content/raw/master/contents/github/GTD/1.webp)](https://projects.cs-tao.cc/gtd-visualization/web)
+[![Overview](https://github.com/CS-Tao/github-content/raw/master/contents/github/GTD/1.webp)](https://projects.cs-tao.cc/gtd-visualization/web/)
 
 ## 项目结构
 
@@ -159,6 +159,7 @@
   
   - 添加 `--rmi type` 参数可以移除镜像，`tpye` 可以为 `all` 或 `local`，`all` 表示移除所有镜像，`local` 表示只移除没有定义标签的镜像
   - 添加 `-v` 或 `--volume` 参数可以移除所有在 `docker-compose.yml` 中定义的数据卷
+
 
   ```bash
   docker-compose down [--rmi <all>|<local>] [-v|--volume]
