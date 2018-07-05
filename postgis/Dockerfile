@@ -1,7 +1,7 @@
 FROM postgres:9.6
 LABEL maintainer="CS-Tao <whucstao@qq.com>" version="1.0.0"
 
-ENV PG_DUMPED_DATA_DEFAULT_URL https://gogs.cs-tao.cc/CS-Tao/GTD-Docker/raw/ca3c9f718ed8a2337874f17b7939a59b84071654/postgis/gtdb.sql
+ENV PG_DUMPED_DATA_DEFAULT_URL https://github.com/CS-Tao/GTD-Docker/releases/download/v1.0.0/gtdb.sql
 
 ENV POSRGRESQL_MAJOR 9.6
 
