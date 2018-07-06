@@ -115,7 +115,7 @@ USE_TZ = True
 
 STATIC_ROOT = '/opt/gtddjango/static/'
 
-STATIC_URL = '/static/'
+STATIC_URL = '/gtd-static/'
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
