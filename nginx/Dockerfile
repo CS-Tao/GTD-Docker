@@ -7,7 +7,7 @@ ENV WEB_REPO_URL https://github.com/CS-Tao/GTD-Visualization.git
 ENV WEB_REPO_BRANCH gh-pages
 ENV WEB_FOLDER web
 ENV WEB_OLD_SRC_URL http://localhost:2001
-ENV WEB_NEW_SRC_URL ../../
+ENV WEB_NEW_SRC_URL ../
 
 RUN echo "Installing packages ..." \
       # && echo 'deb http://mirrors.ustc.edu.cn/debian jessie main contrib non-free' > /etc/apt/sources.list \
