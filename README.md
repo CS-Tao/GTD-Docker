@@ -7,7 +7,7 @@
 
 > Global Terrorist Attacks Visualization System - Deploy Solution by Docker-compose
 
-[![Overview](https://github.com/CS-Tao/github-content/raw/master/contents/github/GTD/1.webp)](https://projects.cs-tao.cc/gtd-visualization/web/)
+[![Overview](https://github.com/CS-Tao/github-content/raw/master/contents/github/GTD/1.webp)](https://projects.cs-tao.cc/gtd-visualization/)
 
 ## 项目结构
 
