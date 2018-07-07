@@ -32,14 +32,16 @@ COPY django_check.sh /usr/local/bin/django_check.sh
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY start_nginx.sh /usr/local/bin/start_nginx.sh
+COPY update_website /usr/local/bin/update_website
 
 RUN chmod +x /usr/local/bin/django_check.sh \
       && chmod +x /docker-entrypoint.sh \
-      && chmod +x /usr/local/bin/start_nginx.sh
+      && chmod +x /usr/local/bin/start_nginx.sh \
+      && chmod +x /usr/local/bin/update_website
 
 EXPOSE 8070
 
-WORKDIR /usr/share/nginx/html/gtd-visualization
+WORKDIR /usr/share/nginx/html/
 
 VOLUME ["/usr/share/nginx/html/static", "/var/gtd/django-sock", "/var/gtd/logs"]
 

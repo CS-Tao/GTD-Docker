@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+apt-get update
+apt-get install -y --no-install-recommends ca-certificates git
+cd /usr/share/nginx/html/
+rm -rf gtd-visualization/
+git clone ${WEB_REPO_URL} -b ${WEB_REPO_BRANCH} gtd-visualization
+cd gtd-visualization/${WEB_FOLDER}
+sed -i "s?baseURL:\"${WEB_OLD_SRC_URL}\"?baseURL:\"${WEB_NEW_SRC_URL}\"?" web.js
+ls -a -l
+apt-get purge -y --auto-remove ca-certificates git
+rm -rf /var/lib/apt/lists/*
+
+echo "Website updated"
