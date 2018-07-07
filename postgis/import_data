@@ -1,2 +1,10 @@
 #!/bin/bash
+set -e
+
+apt-get update
+apt-get install -y --no-install-recommends ca-certificates wget
+
 su - postgres --preserve-environment /usr/local/bin/_import_data $@
+
+apt-get purge -y --auto-remove wget ca-certificates \
+rm -rf /var/lib/apt/lists/*
