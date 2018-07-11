@@ -9,12 +9,9 @@ ENV POSTGIS_MAJOR 2.4
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
-            ca-certificates \
-            wget \
             postgis \
             postgresql-${POSRGRESQL_MAJOR}-postgis-${POSTGIS_MAJOR} \
             postgresql-${POSRGRESQL_MAJOR}-postgis-scripts \
-      && apt-get purge -y --auto-remove wget ca-certificates \
       && rm -rf /var/lib/apt/lists/*
 
 COPY create_role.sh /docker-entrypoint-initdb.d/10-create_role.sh
