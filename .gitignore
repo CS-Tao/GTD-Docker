@@ -1,1 +1,12 @@
 gtdb.sql
+
+/dist/*
+!/dist/django
+!/dist/nginx
+!/dist/postgis
+
+/dist/django/*
+/dist/nginx/*
+/dist/postgis/*
+
+!.gitkeep
